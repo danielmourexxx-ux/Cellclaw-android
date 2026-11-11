@@ -1,4 +1,5 @@
-Build CellClaw APK
+
+name: Build CellClaw APK
 
 on:
   workflow_dispatch:
@@ -42,3 +43,11 @@ jobs:
         run: |
           chmod +x ./gradlew
           ./gradlew --no-daemon assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: cellclaw-debug-apk
+          path: cellclaw/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 14
