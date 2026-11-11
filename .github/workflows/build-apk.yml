@@ -1,5 +1,4 @@
-
-name: Build CellClaw APK
+Build CellClaw APK
 
 on:
   workflow_dispatch:
@@ -19,7 +18,7 @@ jobs:
       - name: Checkout CellClaw source
         uses: actions/checkout@v4
         with:
-          repository: frido22/cellclaw
+          repository: danielmourexxx-ux/cellclaw-custom
           ref: master
           path: cellclaw
 
@@ -43,11 +42,3 @@ jobs:
         run: |
           chmod +x ./gradlew
           ./gradlew --no-daemon assembleDebug
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: cellclaw-debug-apk
-          path: cellclaw/app/build/outputs/apk/debug/*.apk
-          if-no-files-found: error
-          retention-days: 14
